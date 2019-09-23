@@ -11,7 +11,7 @@ pipelineConfig:
               requests:
                 memory: 2Gi
         agent:
-          image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
+          image: 9.46.76.93:5000/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
         stages:
           - name: build-and-push
             environment:
@@ -41,27 +41,27 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.base.generated
-                - --destination=gcr.io/jenkinsxio/builder-base:${inputs.params.version}
+                - --destination=9.46.76.93:5000/jenkinsxio/builder-base:${inputs.params.version}
                 - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache-repo=9.46.76.93:5000/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-ruby-base
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.ruby.generated
-                - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
+                - --destination=9.46.76.93:5000/jenkinsxio/builder-rubybase:${inputs.params.version}
                 - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache-repo=9.46.76.93:5000/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-swift-base
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.swift.generated
-                - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
+                - --destination=9.46.76.93:5000/jenkinsxio/builder-swiftbase:${inputs.params.version}
                 - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache-repo=9.46.76.93:5000/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
 
@@ -75,7 +75,7 @@ pipelineConfig:
               requests:
                 memory: 2Gi
         agent:
-          image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
+          image: 9.46.76.93:5000/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
         stages:
           - name: build-base
             environment:
@@ -113,36 +113,36 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.base.generated
-                - --destination=gcr.io/jenkinsxio/builder-base:${inputs.params.version}
+                - --destination=9.46.76.93:5000/jenkinsxio/builder-base:${inputs.params.version}
                 - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache-repo=9.46.76.93:5000/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-ruby-base
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.ruby.generated
-                - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
+                - --destination=9.46.76.93:5000/jenkinsxio/builder-rubybase:${inputs.params.version}
                 - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache-repo=9.46.76.93:5000/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-swift-base
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.swift.generated
-                - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
+                - --destination=9.46.76.93:5000/jenkinsxio/builder-swiftbase:${inputs.params.version}
                 - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache-repo=9.46.76.93:5000/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
 
             # Create the release notes
             - name: changelog
-              image: gcr.io/jenkinsxio/builder-go:0.1.740
+              image: 9.46.76.93:5000/jenkinsxio/builder-go:0.1.740
               command: ./changelog.sh
 
             # update downstream dependencies
             - name: update-bot
-              image: gcr.io/jenkinsxio/builder-maven:0.1.740
+              image: 9.46.76.93:5000/jenkinsxio/builder-maven:0.1.740
               command: ./update-bot.sh
